@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Time Capsule ⏳</title>
+
+<style>
+body {
+  margin: 0;
+  min-height: 100vh;
+  background: linear-gradient(135deg, #dbeafe, #bfdbfe);
+  font-family: 'Segoe UI', sans-serif;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 30px;
+  color: #1e3a8a;
+}
+
+.container {
+  background: rgba(255, 255, 255, 0.9);
+  border-radius: 25px;
+  padding: 40px;
+  max-width: 800px;
+  width: 100%;
+  text-align: center;
+}
+
+h1 {
+  margin-bottom: 10px;
+}
+
+.subtitle {
+  margin-bottom: 25px;
+  font-size: 1.1em;
+}
+
+button {
+  background: #60a5fa;
+  color: white;
+  border: none;
+  padding: 14px 30px;
+  border-radius: 30px;
+  font-size: 1.05em;
+  cursor: pointer;
+  margin-bottom: 30px;
+}
+
+button:hover {
+  background: #3b82f6;
+  transition: 0.3s;
+}
+
+/* MUTE BUTTON — HIDDEN INITIALLY */
+#muteBtn {
+  display: none;
+
+  position: fixed;
+  top: 18px;
+  right: 18px;
+  width: 44px;
+  height: 44px;
+  padding: 0;
+  border: none;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.8);
+  box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+  align-items: center;
+  justify-content: center;
+  font-size: 20px;
+  cursor: pointer;
+  z-index: 9999;
+}
+
+#capsule {
+  display: none;
+  margin-top: 20px;
+}
+
+/* MESSAGE + PHOTOS LAYOUT */
+.capsule-content {
+  display: flex;
+  gap: 30px;
+  align-items: flex-start;
+  justify-content: center;
+}
+
+.capsule-text {
+  flex: 1;
+  text-align: left;
+  font-size: 1.05em;
+  line-height: 1.6;
+}
+
+.capsule-photos {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.capsule-photos img {
+  width: 220px;
+  border-radius: 15px;
+}
+
+/* MOBILE FIX */
+@media (max-width: 700px) {
+  .capsule-content {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .capsule-text {
+    text-align: center;
+  }
+}
+</style>
+</head>
+
+<body>
+
+<!-- ✅ MUTE BUTTON MOVED ABOVE SCRIPTS -->
+<button id="muteBtn">🔊</button>
+
+<div class="container">
+  <h1>⏳ A Message for You</h1>
+  <div class="subtitle" id="subtitleText">
+    Open this when you’re ready.
+  </div>
+
+  <button id="openBtn" onclick="openCapsule()">Open Time Capsule</button>
+
+  <div id="capsule">
+    <div class="capsule-content">
+
+      <div class="capsule-text">
+        <p>
+          First of all STOP BEING SO CUTE!!! 🥺 Your entire existence is cute ATP,
+          anything and everything you do is cute re 😌
+        </p>
+
+        <p>
+          No matter where life takes us, I hope you always remember to be happy
+          and be proud of yourself. Please be a little narcissistic — it’s very
+          important for you to love yourself first ❤️
+        </p>
+
+        <p>
+          You don't have to compare yourself with any man out there , there's no competition at all , you are the best I could or any girl could ever get🥹
+        </p>
+
+        <p>
+          I will choose you every single day — even after a mere misunderstanding or a big fight💕
+          I choose you. Always ❤️❤️❤️
+        </p>
+      </div>
+
+      <div class="capsule-photos">
+        <img src="images/future1.jpeg">
+        <img src="images/future2.jpeg">
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<audio id="capsuleAudio" loop>
+  <source src="music/capsule.mp3" type="audio/mpeg">
+</audio>
+
+<script>
+function openCapsule() {
+  document.getElementById("capsule").style.display = "block";
+  document.getElementById("openBtn").style.display = "none";
+  document.getElementById("subtitleText").style.display = "none";
+
+  const audio = document.getElementById("capsuleAudio");
+  audio.volume = 0.6;
+  audio.loop = true;
+  audio.play();
+
+  // SHOW MUTE BUTTON
+  const muteBtn = document.getElementById("muteBtn");
+  muteBtn.style.display = "flex";
+}
+
+const muteBtn = document.getElementById("muteBtn");
+const audio = document.getElementById("capsuleAudio");
+
+muteBtn.addEventListener("click", (e) => {
+  e.stopPropagation();
+
+  audio.muted = !audio.muted;
+  muteBtn.textContent = audio.muted ? "🔇" : "🔊";
+});
+</script>
+
+</body>
+</html>
